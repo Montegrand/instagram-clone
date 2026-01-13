@@ -33,9 +33,12 @@
 - 라우팅 구성 완료 (루트/탐색/릴스/메시지/알림/로그인/회원가입/계정-프로필)
 - 공통 레이아웃 분리 완료 (`RootLayout`) 및 헤더 네비 구성
 - 검색 패널 컴포넌트 구성 (라우터 제외, 메뉴 토글 방식)
+- 페이지별 디렉토리 구조로 정리 (feed/explore/reels/direct/notifications/auth/account)
+- Vite 경로 alias 설정 적용 (`@`, `@pages`, `@components` 등)
 - Redux 스토어 및 유저 상태 슬라이스 구성
 - 상태 변경 로거 미들웨어 적용
 - 유저 관리 미들웨어 자리 잡기 완료(주석 처리)
+- Firebase 패키지 설치 및 서비스 파일 플레이스홀더 구성
 
 ## 실행
 ```bash

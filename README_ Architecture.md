@@ -15,7 +15,7 @@ src/
   pages/          # 페이지별 디렉토리 (feed, explore, reels, direct, notifications, auth, account)
   components/     # 공용 UI 컴포넌트 (SearchPanel 등)
   features/       # 도메인별 기능 묶음 (feed, auth, profile, search)
-  services/       # Firebase 초기화 및 API 래퍼
+  services/       # Firebase 초기화 및 API 래퍼 (apiClient/endpoints/firebaseClient)
   store/          # 전역 상태 (Redux)
   hooks/          # 커스텀 훅
   styles/         # 전역 스타일
@@ -38,6 +38,10 @@ src/
 - 로그인 사용자: 전역 상태 (Redux Toolkit)
 - 유저 상태 슬라이스: uid, username, nickname, email, photoURL, bio
 - 피드/검색: 로컬 상태 + 캐시 전략
+
+## 경로 별칭
+- `@`: `src`
+- `@app`, `@pages`, `@components`, `@styles`, `@services`, `@store`, `@hooks`, `@assets`
 
 ## Firebase 사용 범위
 - Auth: 회원가입/로그인/로그아웃
