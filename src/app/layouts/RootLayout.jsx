@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import SearchPanel from '@components/SearchPanel.jsx'
-import './RootLayout.css'
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import SearchPanel from "@components/SearchPanel.jsx";
+import "./RootLayout.css";
 
 function RootLayout() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
     <div className="root-layout">
@@ -67,7 +67,7 @@ function RootLayout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default RootLayout
+export default RootLayout;
