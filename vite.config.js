@@ -25,6 +25,10 @@ export default defineConfig({
       ),
       '@store': path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'src/store'),
       '@hooks': path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'src/hooks'),
+      '@features': path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        'src/features',
+      ),
       '@assets': path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'src/assets'),
     },
   },
