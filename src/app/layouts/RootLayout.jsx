@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import SearchPanel from "@components/SearchPanel.jsx";
+import SearchPanel from "@components/SearchPanel/SearchPanel.jsx";
 import "./RootLayout.css";
 
 function RootLayout() {
@@ -11,12 +11,12 @@ function RootLayout() {
       <header className="root-header">
         <div className="root-header__inner">
           <div className="root-header__brand">
-            <Link className="root-header__logo" to="/">
+            <Link className="root-header__logo" to="/feed">
               Instagram Clone
             </Link>
           </div>
           <nav className="root-nav" aria-label="Primary">
-            <Link className="root-nav__item" to="/">
+            <Link className="root-nav__item" to="/feed">
               홈
             </Link>
             <button
