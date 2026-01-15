@@ -14,7 +14,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route element={<RootLayout />}>
-        <Route path="/" element={<FeedPage />} />
+        <Route path="/feed" element={<FeedPage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/reels" element={<ReelsPage />} />
         <Route path="/direct/inbox" element={<InboxPage />} />
@@ -23,7 +23,7 @@ function AppRoutes() {
           <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
     </Routes>
   )
