@@ -1,0 +1,39 @@
+.input-field__tooltip {
+  position: relative;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  max-width: 260px;
+}
+
+.input-field__tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  background: #111;
+  transform: rotate(45deg);
+}
+
+.input-field__tooltip-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffd166;
+  color: #111;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}

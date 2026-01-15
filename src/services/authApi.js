@@ -130,10 +130,25 @@ export const loginWithEmail = async ({ email, password, redirectUrl }) => {
         uid: credential.user.uid,
         email: credential.user.email || '',
       },
-      redirectUrl: redirectUrl ?? '/',
+      redirectUrl: redirectUrl ?? '/feed',
     }
   } catch (error) {
     return { ok: false, error: error?.message || 'Login failed.' }
+  }
+}
+
+export const resendVerificationEmail = async ({ email, password }) => {
+  if (!email || !password) {
+    return { ok: false, error: 'Email and password are required.' }
+  }
+
+  try {
+    const credential = await signInWithEmailAndPassword(auth, email, password)
+    await sendEmailVerification(credential.user)
+    await signOut(auth)
+    return { ok: true }
+  } catch (error) {
+    return { ok: false, error: error?.message || 'Failed to resend verification.' }
   }
 }
 
@@ -141,4 +156,5 @@ export default {
   signupWithEmail,
   upsertUserProfileIfVerified,
   loginWithEmail,
+  resendVerificationEmail,
 }
