@@ -1,9 +1,9 @@
-import Input from '@components/Input/Input.jsx'
-import { useSignupForm } from '../hooks/index.js'
-import './SignupForm.css'
+import Input from "@components/Input/Input.jsx";
+import { useSignupForm } from "../hooks/index.js";
+import "./SignupForm.css";
 
 function SignupForm() {
-  const { form, status, isDisabled, onChange, onSubmit } = useSignupForm()
+  const { form, status, isDisabled, onChange, onSubmit } = useSignupForm();
 
   return (
     <form className="signup-form" onSubmit={onSubmit}>
@@ -45,14 +45,22 @@ function SignupForm() {
         onChange={onChange}
       />
 
-      {status.error ? <p className="signup-form__error">{status.error}</p> : null}
-      {status.message ? <p className="signup-form__message">{status.message}</p> : null}
+      {status.error ? (
+        <p className="signup-form__error">{status.error}</p>
+      ) : null}
+      {status.message ? (
+        <p className="signup-form__message">{status.message}</p>
+      ) : null}
 
-      <button type="submit" className="signup-form__submit" disabled={isDisabled}>
-        {status.loading ? '가입 중...' : '가입하기'}
+      <button
+        type="submit"
+        className="signup-form__submit"
+        disabled={isDisabled}
+      >
+        {status.loading ? "가입 중..." : "가입"}
       </button>
     </form>
-  )
+  );
 }
 
-export default SignupForm
+export default SignupForm;
