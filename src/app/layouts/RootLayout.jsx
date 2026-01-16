@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet } from "react-router-dom";
-import SearchPanel from "@components/SearchPanel.jsx";
+import SearchPanel from "@/components/SearchPanel/SearchPanel";
 import "./RootLayout.css";
 import {
   homeIcon,
@@ -16,7 +16,7 @@ import {
   notificationsIcon,
   notificationsActiveIcon,
   createIcon,
-  createActiveIcon,
+//   createActiveIcon,
   menuIcon,
   appsIcon,
 } from "@/assets/icons";
