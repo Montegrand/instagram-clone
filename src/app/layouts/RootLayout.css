@@ -69,6 +69,16 @@
 }
 
 .root-nav__avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+
+.root-nav__avatar.is-active {
+  border-color: #111;
 }
 
 .root-nav__icon {
