@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet } from "react-router-dom";
 import SearchPanel from "@/components/SearchPanel/SearchPanel";
+import defaultAvatar from "@/assets/images/avatar-default.png";
 import "./RootLayout.css";
 import {
   homeIcon,
@@ -117,16 +118,20 @@ function RootLayout() {
               <span>만들기</span>
             </button>
 
-            <div className="root-nav__profile">
-              <img
-                className="root-nav__avatar"
-                src="https://via.placeholder.com/28"
-                alt=""
-              />
-              <Link className="root-nav__item" to="/account/profile">
-                프로필 {/* 프로필 사진 삽입 미구현 */}
-              </Link>
-            </div>
+            <NavLink className="root-nav__item" to="/account/profile">
+              {({ isActive }) => (
+                <>
+                  <img
+                    className={`root-nav__avatar ${
+                      isActive ? "is-active" : ""
+                    }`}
+                    src={defaultAvatar}
+                    alt=""
+                  />
+                  <span>프로필</span>
+                </>
+              )}
+            </NavLink>
           </nav>
 
           <div className="root-gnb" aria-label="Global">
