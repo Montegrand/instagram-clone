@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import RootLayout from "@app/layouts/RootLayout.jsx";
 import FeedPage from "@pages/feed/FeedPage.jsx";
 import LoginPage from "@pages/auth/LoginPage.jsx";
@@ -9,6 +10,14 @@ import NotificationsPage from "@pages/notifications/NotificationsPage.jsx";
 import InboxPage from "@pages/direct/InboxPage.jsx";
 import AccountLayout from "@pages/account/AccountLayout.jsx";
 import ProfilePage from "@pages/account/ProfilePage.jsx";
+
+function NotFoundRedirect() {
+  const { isAuthenticated, status } = useSelector((state) => state.user);
+
+  if (status === "loading") return null;
+
+  return <Navigate to={isAuthenticated ? "/feed" : "/"} replace />;
+}
 
 function AppRoutes() {
   return (
@@ -25,6 +34,7 @@ function AppRoutes() {
       </Route>
       <Route path="/" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="*" element={<NotFoundRedirect />} />
     </Routes>
   );
 }

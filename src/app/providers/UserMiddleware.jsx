@@ -23,6 +23,17 @@ function UserMiddleware({ children }) {
           return
         }
 
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email || '',
+            photoURL: user.photoURL || '',
+            username: '',
+            nickname: '',
+            bio: '',
+          }),
+        )
+
         try {
           const userRef = doc(db, 'users', user.uid)
           const userSnap = await getDoc(userRef)

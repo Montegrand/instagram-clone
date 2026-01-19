@@ -1,5 +1,6 @@
 import { LoginForm } from "@features/auth";
 import "./LoginPage.css";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   return (
@@ -11,7 +12,7 @@ function LoginPage() {
             <LoginForm />
           </div>
           <p className="login-signup">
-            계정이 없으신가요? <button type="button">가입하기</button>
+            계정이 없으신가요? <Link to="/signup">가입하기</Link>
           </p>
         </div>
       </section>

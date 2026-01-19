@@ -114,3 +114,73 @@
   flex: 1;
   min-width: 0;
 }
+
+.root-gnb-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 16px 12px 24px;
+  z-index: 50;
+}
+
+.root-gnb-modal__panel {
+  min-width: 240px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.root-gnb-modal__item {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #262626;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.root-gnb-modal__item:hover {
+  background: #f2f2f2;
+}
+
+.root-gnb-modal__item--danger {
+  color: #ed4956;
+}
+
+.root-gnb-modal__divider {
+  height: 1px;
+  background: #efefef;
+  margin: 6px 8px;
+}
+
+.root-auth-modal__header h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.root-auth-modal__body {
+  color: #555;
+  font-size: 14px;
+}
+
+.root-auth-modal__actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.root-auth-modal__actions button {
+  border: 0;
+  background: #4a5df9;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}

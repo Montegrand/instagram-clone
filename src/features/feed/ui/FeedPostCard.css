@@ -1,0 +1,122 @@
+.feed-post-card {
+  border: 1px solid #dbdbdb;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+
+.feed-post-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feed-post-card__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feed-post-card__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.feed-post-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feed-post-card__username {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.feed-post-card__location {
+  font-size: 12px;
+  color: #737373;
+}
+
+.feed-post-card__more {
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  color: #737373;
+  cursor: pointer;
+}
+
+.feed-post-card__media {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.feed-post-card__media img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.feed-post-card__placeholder {
+  height: 280px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  color: #8e8e8e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.feed-post-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.feed-post-card__actions-left {
+  display: flex;
+  gap: 8px;
+}
+
+.feed-post-card__actions button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.feed-post-card__stats {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.feed-post-card__caption {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.feed-post-card__caption p {
+  margin: 0;
+  color: #262626;
+}
+
+.feed-post-card__comments {
+  font-size: 12px;
+  color: #737373;
+}
+
+.feed-post-card__timestamp {
+  font-size: 11px;
+  color: #a1a1a1;
+}
