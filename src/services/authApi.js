@@ -26,6 +26,70 @@ const buildUserPayload = ({ uid, email, phone, name, nickname }) => ({
   nickname: normalizeNickname(nickname, name),
 })
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const withTimeout = (promise, ms, label) => {
+  let timeoutId
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`Timeout after ${ms}ms (${label})`))
+    }, ms)
+  })
+  return Promise.race([promise, timeoutPromise]).finally(() => {
+    clearTimeout(timeoutId)
+  })
+}
+
+const saveUserProfileWithRetry = async ({
+  uid,
+  email,
+  phone,
+  name,
+  nickname,
+  maxAttempts = 3,
+  retryDelayMs = 3000,
+}) => {
+  const payload = buildUserPayload({
+    uid,
+    email,
+    phone,
+    name,
+    nickname,
+  })
+  const userRef = doc(db, 'users', payload.uid)
+
+  const attemptSave = async () => {
+    await setDoc(
+      userRef,
+      {
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true },
+    )
+  }
+
+  let lastError = null
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      await withTimeout(
+        attemptSave(attempt),
+        10000,
+        `users/${payload.uid} setDoc attempt ${attempt}`,
+      )
+      return { ok: true }
+    } catch (error) {
+      lastError = error
+      if (attempt < maxAttempts) {
+        await sleep(retryDelayMs)
+      }
+    }
+  }
+
+  return { ok: false, error: lastError }
+}
+
 export const signupWithEmail = async ({
   email,
   password,
@@ -46,7 +110,26 @@ export const signupWithEmail = async ({
 
   try {
     const credential = await createUserWithEmailAndPassword(auth, email, password)
-    await sendEmailVerification(credential.user)
+    await credential.user.getIdToken(true)
+
+    try {
+      await sendEmailVerification(credential.user)
+    } catch (e) {
+      console.log(e)
+      // Ignore verification errors to avoid blocking signup.
+    }
+
+    const saveResult = await saveUserProfileWithRetry({
+      uid: credential.user.uid,
+      email: credential.user.email,
+      phone,
+      name,
+      nickname,
+    })
+    if (!saveResult.ok) {
+      return { ok: false, error: 'Failed to save profile.' }
+    }
+
     await signOut(auth)
 
     return {

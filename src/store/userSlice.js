@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const defaultProfileImage = '/images/profile/avatar-default.png'
+
 const initialState = {
   uid: null,
   username: '',
   nickname: '',
   email: '',
-  photoURL: '',
+  photoURL: defaultProfileImage,
   bio: '',
   isAuthenticated: false,
   status: 'idle',
@@ -18,11 +20,12 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       const { uid, username, nickname, email, photoURL, bio } = action.payload
+      const normalizedPhotoURL = typeof photoURL === 'string' ? photoURL.trim() : ''
       state.uid = uid || null
       state.username = username || ''
       state.nickname = nickname || ''
       state.email = email || ''
-      state.photoURL = photoURL || ''
+      state.photoURL = normalizedPhotoURL || defaultProfileImage
       state.bio = bio || ''
       state.isAuthenticated = Boolean(uid)
       state.status = 'succeeded'
@@ -33,7 +36,7 @@ const userSlice = createSlice({
       state.username = ''
       state.nickname = ''
       state.email = ''
-      state.photoURL = ''
+      state.photoURL = defaultProfileImage
       state.bio = ''
       state.isAuthenticated = false
       state.status = 'idle'

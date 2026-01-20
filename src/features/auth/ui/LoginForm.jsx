@@ -2,20 +2,26 @@ import Button from '@components/ui/Button/Button.jsx'
 import Input from '@components/Input/Input.jsx'
 import EmailVerifyModal from './EmailVerifyModal.jsx'
 import { useLoginForm } from '../hooks/index.js'
+import { useLocation } from 'react-router-dom'
 import './LoginForm.css'
 
 function LoginForm() {
+  const location = useLocation()
+  const fromSignup = !!location.state?.fromSignup
+  const initialEmail =
+    fromSignup && typeof location.state?.email === 'string' ? location.state.email : ''
   const {
     form,
     status,
     isDisabled,
     verifyModalOpen,
     pendingEmail,
+    canResend,
     onChange,
     onSubmit,
     onCloseVerifyModal,
     onResendVerification,
-  } = useLoginForm()
+  } = useLoginForm({ initialEmail, initialVerifyOpen: fromSignup })
 
   return (
     <>
@@ -64,7 +70,7 @@ function LoginForm() {
         open={verifyModalOpen}
         email={pendingEmail}
         onClose={onCloseVerifyModal}
-        onResend={onResendVerification}
+        onResend={canResend ? onResendVerification : null}
       />
     </>
   )

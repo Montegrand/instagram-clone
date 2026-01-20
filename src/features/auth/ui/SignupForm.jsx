@@ -48,9 +48,6 @@ function SignupForm() {
       {status.error ? (
         <p className="signup-form__error">{status.error}</p>
       ) : null}
-      {status.message ? (
-        <p className="signup-form__message">{status.message}</p>
-      ) : null}
 
       <button
         type="submit"
