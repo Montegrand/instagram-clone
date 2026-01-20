@@ -1,6 +1,6 @@
-import { initializeApp } from 'firebase/app'
+import { initializeApp, getApps, getApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, initializeFirestore, memoryLocalCache } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
@@ -14,10 +14,29 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
-const app = initializeApp(firebaseConfig)
-const auth = getAuth(app)
-const db = getFirestore(app)
-const storage = getStorage(app)
+// Vite HMR 대응: 전역 싱글톤 패턴
+const globalForFirebase = globalThis
+
+if (!globalForFirebase.__FIREBASE_APP__) {
+  globalForFirebase.__FIREBASE_APP__ = getApps().length === 0
+    ? initializeApp(firebaseConfig)
+    : getApp()
+  globalForFirebase.__FIREBASE_AUTH__ = getAuth(globalForFirebase.__FIREBASE_APP__)
+  try {
+    globalForFirebase.__FIREBASE_DB__ = initializeFirestore(
+      globalForFirebase.__FIREBASE_APP__,
+      { localCache: memoryLocalCache() },
+    )
+  } catch {
+    globalForFirebase.__FIREBASE_DB__ = getFirestore(globalForFirebase.__FIREBASE_APP__)
+  }
+  globalForFirebase.__FIREBASE_STORAGE__ = getStorage(globalForFirebase.__FIREBASE_APP__)
+}
+
+const app = globalForFirebase.__FIREBASE_APP__
+const auth = globalForFirebase.__FIREBASE_AUTH__
+const db = globalForFirebase.__FIREBASE_DB__
+const storage = globalForFirebase.__FIREBASE_STORAGE__
 
 const firebaseClient = {
   app,
