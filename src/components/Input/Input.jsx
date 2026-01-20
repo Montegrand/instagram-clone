@@ -38,7 +38,7 @@ function Input({
   const showTooltip = Boolean(tooltip) && isFocused
 
   return (
-    <div className={wrapperClassName}>
+    <div className={`input__wrap ${wrapperClassName}`}>
       {label ? (
         <label htmlFor={baseId} className="input-field__label">
           {label}

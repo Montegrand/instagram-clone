@@ -34,9 +34,11 @@ function UserMiddleware({ children }) {
           }),
         )
 
+        // Firestore 프로필 로드 시도 (실패해도 앱은 계속 작동)
         try {
           const userRef = doc(db, 'users', user.uid)
           const userSnap = await getDoc(userRef)
+          
           if (!userSnap.exists()) {
             await setDoc(
               userRef,
@@ -61,7 +63,17 @@ function UserMiddleware({ children }) {
             }),
           )
         } catch (error) {
-          dispatch(setUserError(error?.message || 'Failed to load user profile.'))
+          // Firestore 에러 시에도 기본 정보로 로그인 유지
+          dispatch(
+            setUser({
+              uid: user.uid,
+              email: user.email || '',
+              photoURL: user.photoURL || '',
+              username: '',
+              nickname: '',
+              bio: '',
+            }),
+          )
         }
       },
       (error) => {

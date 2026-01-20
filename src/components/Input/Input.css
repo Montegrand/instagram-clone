@@ -1,5 +1,12 @@
-.input-field__tooltip {
+.input__wrap {
   position: relative;
+}
+
+.input-field__tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
   margin-top: 8px;
   display: inline-flex;
   align-items: center;

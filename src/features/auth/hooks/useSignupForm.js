@@ -17,7 +17,6 @@ export const useSignupForm = () => {
   const [form, setForm] = useState(getDefaultState)
   const [status, setStatus] = useState({ loading: false, error: '', message: '' })
   const navigate = useNavigate()
-
   const isDisabled = useMemo(() => {
     return (
       !form.email.trim() ||
@@ -63,24 +62,37 @@ export const useSignupForm = () => {
 
     setStatus({ loading: true, error: '', message: '' })
 
-    const result = await signupWithEmail({
-      email: form.email.trim(),
-      password: form.password.trim(),
-      name: form.name.trim(),
-      nickname: form.nickname.trim(),
-    })
+    try {
+      const result = await signupWithEmail({
+        email: form.email.trim(),
+        password: form.password.trim(),
+        name: form.name.trim(),
+        nickname: form.nickname.trim(),
+      })
 
-    if (!result.ok) {
-      setStatus({ loading: false, error: result.error || 'Signup failed.', message: '' })
-      return
+      if (!result.ok) {
+        setStatus({ loading: false, error: result.error || 'Signup failed.', message: '' })
+        return
+      }
+
+      setStatus({
+        loading: false,
+        error: '',
+        message: '가입 완료! 이메일 인증 후 로그인해주세요.',
+      })
+      navigate('/', {
+        state: {
+          fromSignup: true,
+          email: form.email.trim(),
+        },
+      })
+    } catch (error) {
+      setStatus({
+        loading: false,
+        error: error?.message || '회원가입 중 오류가 발생했습니다.',
+        message: '',
+      })
     }
-
-    setStatus({
-      loading: false,
-      error: '',
-      message: '가입 완료! 이메일 인증 후 로그인해주세요.',
-    })
-    navigate(result.redirectUrl || '/')
   }
 
   return {

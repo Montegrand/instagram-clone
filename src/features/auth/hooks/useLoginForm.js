@@ -2,15 +2,18 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginWithEmail, resendVerificationEmail } from '@services/authApi.js'
 
-const getDefaultState = () => ({
-  email: '',
+const getDefaultState = (initialEmail = '') => ({
+  email: initialEmail,
   password: '',
 })
 
-export const useLoginForm = () => {
-  const [form, setForm] = useState(getDefaultState)
+export const useLoginForm = ({ initialEmail = '', initialVerifyOpen = false } = {}) => {
+  const normalizedInitialEmail =
+    typeof initialEmail === 'string' ? initialEmail.trim() : ''
+  const [form, setForm] = useState(() => getDefaultState(normalizedInitialEmail))
   const [status, setStatus] = useState({ loading: false, error: '' })
-  const [verifyModalOpen, setVerifyModalOpen] = useState(false)
+  const [verifyModalOpen, setVerifyModalOpen] = useState(!!initialVerifyOpen)
+  const [modalEmail, setModalEmail] = useState(normalizedInitialEmail)
   const [pendingCredentials, setPendingCredentials] = useState(null)
   const navigate = useNavigate()
 
@@ -34,10 +37,13 @@ export const useLoginForm = () => {
 
     if (!result.ok) {
       if (result.code === 'EMAIL_NOT_VERIFIED') {
+        const emailValue = form.email.trim()
+        const passwordValue = form.password.trim()
         setPendingCredentials({
-          email: form.email.trim(),
-          password: form.password.trim(),
+          email: emailValue,
+          password: passwordValue,
         })
+        setModalEmail(emailValue)
         setVerifyModalOpen(true)
         setStatus({ loading: false, error: '' })
         return
@@ -66,7 +72,8 @@ export const useLoginForm = () => {
     status,
     isDisabled,
     verifyModalOpen,
-    pendingEmail: pendingCredentials?.email,
+    pendingEmail: modalEmail,
+    canResend: !!pendingCredentials,
     onChange,
     onSubmit,
     onCloseVerifyModal: () => setVerifyModalOpen(false),
