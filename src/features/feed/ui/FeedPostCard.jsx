@@ -5,6 +5,21 @@ const getPrimaryImage = (images) => {
   return images[0] || "";
 };
 
+const formatCreatedAt = (value) => {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  if (value instanceof Date) {
+    return value.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }
+  return "";
+};
+
 function FeedPostCard({ post, onOpen }) {
   if (!post) return null;
 
@@ -22,6 +37,7 @@ function FeedPostCard({ post, onOpen }) {
   const primaryImage = getPrimaryImage(imageUrls);
   const displayLikes = Number.isFinite(likeCount) ? likeCount : 0;
   const displayComments = Number.isFinite(commentCount) ? commentCount : 0;
+  const displayCreatedAt = formatCreatedAt(createdAt);
 
   return (
     <article className="feed-post-card">
@@ -29,7 +45,7 @@ function FeedPostCard({ post, onOpen }) {
         <div className="feed-post-card__profile">
           <img
             className="feed-post-card__avatar"
-            src={profileImageUrl || "https://via.placeholder.com/36"}
+            src={profileImageUrl || "/images/profile/default-avatar.png"}
             alt=""
           />
           <div className="feed-post-card__meta">
@@ -78,8 +94,8 @@ function FeedPostCard({ post, onOpen }) {
         댓글 {displayComments}개 모두 보기
       </div>
 
-      {createdAt ? (
-        <div className="feed-post-card__timestamp">{createdAt}</div>
+      {displayCreatedAt ? (
+        <div className="feed-post-card__timestamp">{displayCreatedAt}</div>
       ) : null}
     </article>
   );

@@ -1,0 +1,77 @@
+.create-post__panel--select {
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.create-post__panel--filled {
+  padding: 0;
+}
+
+.create-post__drop--select {
+  width: 100%;
+  height: 100%;
+  max-width: 680px;
+  min-height: 420px;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.create-post__drop--dragging {
+  border: 2px dashed #4a5df9;
+  border-radius: 12px;
+  background: #f4f6ff;
+}
+
+.create-post__select-preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.create-post__select-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.15s ease;
+}
+
+.create-post__drop-icon {
+  width: 96px;
+  height: 77px;
+}
+
+.create-post__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.create-post__select-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #4a5df9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.create-post__select-button input {
+  display: none;
+}

@@ -55,7 +55,7 @@ function RootLayout() {
             </Link>
           </div>
           <nav className="root-nav" aria-label="Primary">
-            <NavLink className="root-nav__item" to="/" end>
+            <NavLink className="root-nav__item" to="/feed" end>
               {({ isActive }) => (
                 <>
                   <img
@@ -244,6 +244,8 @@ function RootLayout() {
         titleId="create-post-title"
         onClose={() => setIsCreateOpen(false)}
         dialogClassName="modal__dialog--create-post"
+        showClose
+        closeLabel="닫기"
       >
         <CreatePostModal onClose={() => setIsCreateOpen(false)} />
       </Modal>

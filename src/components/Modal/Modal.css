@@ -9,6 +9,22 @@
   padding: 24px;
 }
 
+.modal__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal__close svg {
+  width: 30px;
+}
+
 .modal__dialog {
   width: min(420px, 100%);
   border-radius: 14px;
@@ -18,8 +34,10 @@
 }
 
 .modal__dialog--create-post {
-  width: 90vw;
-  max-width: 90vw;
-  height: 85vh;
-  padding: 24px;
+  width: min(960px, 92vw);
+  max-width: 960px;
+  height: 88vh;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
 }
