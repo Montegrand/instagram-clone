@@ -89,6 +89,9 @@
 }
 
 .feed-post-card__actions button {
+  display: flex;
+  gap: 4px;
+  align-items: center;
   border: 0;
   background: transparent;
   cursor: pointer;
